@@ -11,3 +11,67 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.body {
+  background-color: #fff;
+}
+
+.card {
+  cursor: pointer;
+  width: 18rem;
+}
+
+@media screen and (max-width: 750px) {
+  .card {
+    width: 100%;
+  }
+}
+
+.card:hover {
+  background-color: #f8f9fa;
+}
+
+.post-detail {
+  margin-top: 2rem;
+}
+
+.comments {
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.post {
+  max-width: 30rem;
+  top: 3.5rem;
+  background-color: #fff;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.post-body {
+  padding: 1rem 1rem 0.5rem;
+}
+
+.post-text {
+  margin-bottom: 0;
+}
+
+.comments {
+  max-width: 30rem;
+}
+
+@media screen and (min-width: 767px) {
+  .post {
+    border-left: 0;
+    border-bottom: 0;
+    border-top: 0;
+    border-right: 1px solid #dee2e6 !important;
+  }
+
+  .post-detail {
+    height: 50vh;
+    margin-top: 5rem;
+  }
+}

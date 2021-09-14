@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+import React, { useContext } from 'react';
+import { useEffect } from 'react';
+import { Switch, Route } from 'react-router';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 import './App.css';
+import PostDetail from './pages/PostDetail';
+import Posts from './pages/Posts';
+import { Context } from './context/index';
 
 function App() {
+  const context = useContext(Context);
+
+  useEffect(() => {
+    axios
+      .all([
+        axios.get(`https://jsonplaceholder.typicode.com/posts`),
+        axios.get(`https://jsonplaceholder.typicode.com/comments`),
+      ])
+      .then(
+        axios.spread(({ data: posts }, { data: comments }) => {
+          context.setPosts(posts);
+          context.setComments(comments);
+        })
+      );
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <nav className='navbar navbar-light bg-light sticky-top'>
+        <div className='container'>
+          <Link className='navbar-brand' to='/'>
+            My Posts
+          </Link>
+        </div>
+      </nav>
+      <div className='container'>
+        <Switch>
+          <Route path='/' component={Posts} exact />
+          <Route path='/posts/:postId' component={PostDetail} />
+        </Switch>
+      </div>
+    </React.Fragment>
   );
 }
 
